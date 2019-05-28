@@ -1,10 +1,10 @@
 ﻿  Planner.cpp
-c:\users\ben drees\source\repos\planner\planner\planner.cpp(56): warning C4018: '<': signed/unsigned mismatch
-c:\users\ben drees\source\repos\planner\planner\planner.cpp(59): warning C4018: '<': signed/unsigned mismatch
-c:\users\ben drees\source\repos\planner\planner\planner.cpp(91): warning C4018: '<': signed/unsigned mismatch
-c:\users\ben drees\source\repos\planner\planner\planner.cpp(94): warning C4018: '<': signed/unsigned mismatch
-c:\users\ben drees\source\repos\planner\planner\planner.cpp(111): warning C4018: '<': signed/unsigned mismatch
-c:\users\ben drees\source\repos\planner\planner\planner.cpp(114): warning C4018: '<': signed/unsigned mismatch
-c:\users\ben drees\source\repos\planner\planner\planner.cpp(147): warning C4018: '>': signed/unsigned mismatch
-c:\users\ben drees\source\repos\planner\planner\planner.cpp(160): warning C4018: '<': signed/unsigned mismatch
+c:\users\ben drees\source\repos\planner\planner\planner.cpp(66): warning C4018: '<': signed/unsigned mismatch
+c:\users\ben drees\source\repos\planner\planner\planner.cpp(69): warning C4018: '<': signed/unsigned mismatch
+c:\users\ben drees\source\repos\planner\planner\planner.cpp(101): warning C4018: '<': signed/unsigned mismatch
+c:\users\ben drees\source\repos\planner\planner\planner.cpp(104): warning C4018: '<': signed/unsigned mismatch
+c:\users\ben drees\source\repos\planner\planner\planner.cpp(121): warning C4018: '<': signed/unsigned mismatch
+c:\users\ben drees\source\repos\planner\planner\planner.cpp(124): warning C4018: '<': signed/unsigned mismatch
+c:\users\ben drees\source\repos\planner\planner\planner.cpp(157): warning C4018: '>': signed/unsigned mismatch
+c:\users\ben drees\source\repos\planner\planner\planner.cpp(170): warning C4018: '<': signed/unsigned mismatch
   Planner.vcxproj -> C:\Users\Ben Drees\source\repos\Planner\Debug\Planner.exe
