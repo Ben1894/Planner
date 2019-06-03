@@ -1,4 +1,5 @@
-﻿  Planner.cpp
+﻿  stdafx.cpp
+  Planner.cpp
 c:\users\ben drees\source\repos\planner\planner\planner.cpp(62): warning C4018: '<': signed/unsigned mismatch
 c:\users\ben drees\source\repos\planner\planner\planner.cpp(65): warning C4018: '<': signed/unsigned mismatch
 c:\users\ben drees\source\repos\planner\planner\planner.cpp(99): warning C4018: '<': signed/unsigned mismatch
