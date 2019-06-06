@@ -1,15 +1,15 @@
 ﻿  stdafx.cpp
   Planner.cpp
-Planner.cpp(83): warning C4018: '<': signed/unsigned mismatch
-Planner.cpp(86): warning C4018: '<': signed/unsigned mismatch
-Planner.cpp(104): warning C4018: '<': signed/unsigned mismatch
-Planner.cpp(107): warning C4018: '<': signed/unsigned mismatch
-Planner.cpp(141): warning C4018: '<': signed/unsigned mismatch
-Planner.cpp(144): warning C4018: '<': signed/unsigned mismatch
-Planner.cpp(164): warning C4018: '<': signed/unsigned mismatch
-Planner.cpp(167): warning C4018: '<': signed/unsigned mismatch
-Planner.cpp(211): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(87): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(90): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(108): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(111): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(145): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(148): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(168): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(171): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(212): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  All 374 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 371 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   Planner.vcxproj -> C:\Users\Ben Drees\source\repos\Planner\Release\Planner.exe
