@@ -27,8 +27,16 @@ std::string endClass = "cZvz";
 std::string startHomework = "zZvh";
 std::string endHomework = "hZvz";
 
+enum displayOption
+{
+	NUMBEREDCLASSES,
+	ENERYTHING,
+	NUMBEREDHOMEWORK
+};
+
 bool cinInputValidation();
 bool cinNumber(int &var, int numberCheck = -10);
+int showData(displayOption option);
 
 class classAndHomework
 {
@@ -39,7 +47,6 @@ public:
 
 std::vector<classAndHomework> data;
 
-void displayClasses();
 void storeToVector()
 {
 	std::ifstream file("saveData.txt");
@@ -83,10 +90,10 @@ void updateTextFile()
 {
 	std::ofstream testing;
 	testing.open("saveData.txt");
-	for (int i = 0; i < data.size(); i++)
+	for (unsigned int i = 0; i < data.size(); i++)
 	{
 		testing << startClass << data[i].name;
-		for (int j = 0; j < data[i].homework.size(); j++)
+		for (unsigned int j = 0; j < data[i].homework.size(); j++)
 		{
 			testing << startHomework << data[i].homework[j] << endHomework;
 		}
@@ -103,19 +110,40 @@ void displayHomework()
 		system("pause");
 		return;
 	}
-
-	for (int i = 0; i < data.size(); i++)
-	{
-		std::cout << data[i].name << "\n";
-		for (int j = 0; j < data[i].homework.size(); j++)
-		{
-			std::cout << "   " << data[i].homework[j] << "\n";
-		}
-	}
+	showData(ENERYTHING);
 	std::cout << "\n\n";
 	system("pause");
 	system("CLS");
 }
+
+int showData(displayOption option)
+{
+	int number = 1;
+	for (unsigned int i = 0; i < data.size(); i++)
+	{
+		if (option == NUMBEREDCLASSES)
+		{
+			std::cout << i + 1 << ".";
+		}
+		std::cout << data[i].name << "\n";
+		if (option != NUMBEREDCLASSES)
+		{
+			for (unsigned int j = 0; j < data[i].homework.size(); j++)
+			{
+				std::cout << "   ";
+				if (option == NUMBEREDHOMEWORK)
+				{
+					std::cout << number << ".";
+				}
+				std::cout << data[i].homework[j] << "\n";
+				number++;
+			}
+		}
+	}
+	return number;
+}
+
+
 void addHomework()
 {
 	if (!(data.size() > 0))
@@ -126,7 +154,7 @@ void addHomework()
 	}
 	int pickedClass = 0;
 	std::string homework;
-	displayClasses();
+	showData(NUMBEREDCLASSES);
 	std::cout << "\nEnter Class Number To Add Homework To:";
 	if(!cinNumber(pickedClass, data.size()))
 	{
@@ -140,34 +168,25 @@ void addHomework()
 
 void removeHomework()
 {
-	int number = 1;
-	for (int i = 0; i < data.size(); i++)
-	{
-		std::cout << data[i].name << "\n";
-		for (int j = 0; j < data[i].homework.size(); j++)
-		{
-			std::cout << "   " << number << "." << data[i].homework[j] << "\n";
-			number++;
-		}
-	}
+	int number = showData(NUMBEREDHOMEWORK);
 	if (number == 1)
 	{
 		std::cout << "Please Add Homework First\n";
 		system("pause");
 		return;
 	}
-	number = 0;
 	std::cout << "Enter Homework Number to Remove:";
 	int removeNumber = 0;
+	number = 0;
 	if (!cinNumber(removeNumber))
 	{
 		return;
 	}
 	removeNumber--;
-	for (int i = 0; i < data.size(); i++)
+	for (unsigned int i = 0; i < data.size(); i++)
 	{
 		std::cout << data[i].name << "\n";
-		for (int j = 0; j < data[i].homework.size(); j++)
+		for (unsigned int j = 0; j < data[i].homework.size(); j++)
 		{
 			if (removeNumber == number)
 			{
@@ -194,7 +213,7 @@ void removeClass()
 		system("pause");
 		return;
 	}
-	displayClasses();
+	showData(NUMBEREDCLASSES);
 	std::cout << "\nEnter Class Number to Remove:";
 	int classNumber;
 	if (!cinNumber(classNumber, data.size()))
@@ -204,15 +223,6 @@ void removeClass()
 	
 	classNumber--;
 	data.erase(data.begin() + classNumber);
-}
-
-void displayClasses()
-{
-	for (int i = 0; i < data.size(); i++)
-	{
-		std::cout << i+1 << ".";
-		std::cout << data[i].name << "\n";
-	}
 }
 
 bool cinNumber(int &var, int numberCheck)
@@ -252,7 +262,7 @@ void renameClass()
 	}
 	int pickedClass = 0;
 	std::string newName;
-	displayClasses();
+	showData(NUMBEREDCLASSES);
 	std::cout << "\nEnter Class Number To Rename:";
 	if (!cinNumber(pickedClass, data.size()))
 	{
@@ -274,7 +284,7 @@ void switchClass()
 	}
 	int pickedClass = 0;
 	int pickedClass2 = 0;
-	displayClasses();
+	showData(NUMBEREDCLASSES);
 	std::cout << "\nEnter Class Number To Swap:";
 	if (!cinNumber(pickedClass, data.size()))
 	{
@@ -287,7 +297,6 @@ void switchClass()
 	}
 	std::swap(data[pickedClass - 1], data[pickedClass2 - 1]);
 }
-
 
 bool cinInputValidation()
 {
