@@ -90,10 +90,10 @@ void updateTextFile()
 {
 	std::ofstream testing;
 	testing.open("saveData.txt");
-	for (unsigned int i = 0; i < data.size(); i++)
+	for (auto i = 0; i < data.size(); i++)
 	{
 		testing << startClass << data[i].name;
-		for (unsigned int j = 0; j < data[i].homework.size(); j++)
+		for (auto j = 0; j < data[i].homework.size(); j++)
 		{
 			testing << startHomework << data[i].homework[j] << endHomework;
 		}
@@ -119,7 +119,7 @@ void displayHomework()
 int showData(displayOption option)
 {
 	int number = 1;
-	for (unsigned int i = 0; i < data.size(); i++)
+	for (auto i = 0; i < data.size(); i++)
 	{
 		if (option == NUMBEREDCLASSES)
 		{
@@ -128,7 +128,7 @@ int showData(displayOption option)
 		std::cout << data[i].name << "\n";
 		if (option != NUMBEREDCLASSES)
 		{
-			for (unsigned int j = 0; j < data[i].homework.size(); j++)
+			for (auto j = 0; j < data[i].homework.size(); j++)
 			{
 				std::cout << "   ";
 				if (option == NUMBEREDHOMEWORK)
@@ -153,7 +153,6 @@ void addHomework()
 		return;
 	}
 	int pickedClass = 0;
-	std::string homework;
 	showData(NUMBEREDCLASSES);
 	std::cout << "\nEnter Class Number To Add Homework To:";
 	if(!cinNumber(pickedClass, data.size()))
@@ -162,7 +161,9 @@ void addHomework()
 	}
 	std::cout << "Enter Homework:";
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::string homework;
 	std::getline(std::cin, homework);
+	if (homework == "c") return;
 	data[(pickedClass - 1)].homework.push_back(homework);
 }
 
@@ -183,10 +184,10 @@ void removeHomework()
 		return;
 	}
 	removeNumber--;
-	for (unsigned int i = 0; i < data.size(); i++)
+	for (auto i = 0; i < data.size(); i++)
 	{
 		std::cout << data[i].name << "\n";
-		for (unsigned int j = 0; j < data[i].homework.size(); j++)
+		for (auto j = 0; j < data[i].homework.size(); j++)
 		{
 			if (removeNumber == number)
 			{
@@ -202,6 +203,7 @@ void addClass()
 	std::string newClass;
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::getline(std::cin, newClass);
+	if (newClass == "c") return;
 	data.push_back(classAndHomework{newClass});
 }
 
@@ -261,7 +263,7 @@ void renameClass()
 		return;
 	}
 	int pickedClass = 0;
-	std::string newName;
+
 	showData(NUMBEREDCLASSES);
 	std::cout << "\nEnter Class Number To Rename:";
 	if (!cinNumber(pickedClass, data.size()))
@@ -270,7 +272,9 @@ void renameClass()
 	}
 	std::cout << "Enter New Name:";
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::string newName;
 	std::getline(std::cin, newName);
+	if (newName == "c") return;
 	data[pickedClass-1].name = newName;
 }
 
@@ -340,6 +344,7 @@ int main()
 	GetWindowRect(console, &ConsoleRect);
 	MoveWindow(console, ConsoleRect.left, ConsoleRect.top, 450, 460, TRUE);
 	removeScrollbars();
+	std::cout << "To Break from a Function Enter 'c'\n" << "or an Invalid Input\n\n";
 	while (1)
 	{
 		removeScrollbars();
