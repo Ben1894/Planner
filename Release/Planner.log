@@ -1,7 +1,13 @@
 ﻿  Planner.cpp
+Planner.cpp(93): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(96): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(122): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(131): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(187): warning C4018: '<': signed/unsigned mismatch
+Planner.cpp(190): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  3 of 371 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+  0 of 371 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    33 functions had inline decision re-evaluated but remain unchanged
+    23 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Planner.vcxproj -> C:\Users\Ben Drees\source\repos\Planner\Release\Planner.exe
