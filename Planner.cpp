@@ -1,15 +1,9 @@
-﻿// Planner.cpp : Defines the entry point for the console application.
-//
-#include "stdafx.h"
-#include <string>
-#include <iostream>
+﻿#include "stdafx.h"
 #include <algorithm>
-#include <vector>
-#include <limits>
 #include <fstream>
-#include <cstdlib>
-#include <cstdint>
-#include <sstream>
+#include <iostream>
+#include <string>
+#include <vector>
 
 # ifndef WIN32_LEAN_AND_MEAN
 #   define WIN32_LEAN_AND_MEAN
@@ -86,6 +80,21 @@ void storeToVector()
 
 	
 }
+
+bool cinString(std::string &str, bool errorChecking = true)
+{
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::getline(std::cin, str);
+	if (errorChecking == true)
+	{
+		if (str == "c")
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 void updateTextFile()
 {
 	std::ofstream testing;
@@ -101,6 +110,7 @@ void updateTextFile()
 	}
 	testing.close();
 }
+
 void displayHomework()
 {
 	system("CLS");
@@ -152,18 +162,20 @@ void addHomework()
 		system("pause");
 		return;
 	}
-	int pickedClass = 0;
 	showData(NUMBEREDCLASSES);
 	std::cout << "\nEnter Class Number To Add Homework To:";
+	int pickedClass;
 	if(!cinNumber(pickedClass, data.size()))
 	{
 		return;
 	}
+
 	std::cout << "Enter Homework:";
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::string homework;
-	std::getline(std::cin, homework);
-	if (homework == "c") return;
+	if (!cinString(homework))
+	{
+		return;
+	}
 	data[(pickedClass - 1)].homework.push_back(homework);
 }
 
@@ -201,9 +213,10 @@ void addClass()
 {
 	std::cout << "Enter Class Name:";
 	std::string newClass;
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	std::getline(std::cin, newClass);
-	if (newClass == "c") return;
+	if (!cinString(newClass))
+	{
+		return;
+	}
 	data.push_back(classAndHomework{newClass});
 }
 
@@ -271,10 +284,11 @@ void renameClass()
 		return;
 	}
 	std::cout << "Enter New Name:";
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::string newName;
-	std::getline(std::cin, newName);
-	if (newName == "c") return;
+	if (!cinString(newName))
+	{
+		return;
+	}
 	data[pickedClass-1].name = newName;
 }
 
