@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
 # ifndef WIN32_LEAN_AND_MEAN
 #   define WIN32_LEAN_AND_MEAN
 # endif
@@ -15,30 +14,13 @@
 #   define NOMINMAX
 # endif
 #include <windows.h>
+#include "mainIncludes.h"
+#include "coreFunctions.h"
 
 std::string startClass = "zZvc";
 std::string endClass = "cZvz";
 std::string startHomework = "zZvh";
 std::string endHomework = "hZvz";
-
-enum displayOption
-{
-	NUMBEREDCLASSES,
-	ENERYTHING,
-	NUMBEREDHOMEWORK
-};
-
-bool cinInputValidation();
-bool cinNumber(int &var, int numberCheck = -10);
-int showData(displayOption option);
-
-class classAndHomework
-{
-public:
-	std::string name;
-	std::vector<std::string> homework;
-};
-
 std::vector<classAndHomework> data;
 
 void storeToVector()
@@ -76,23 +58,7 @@ void storeToVector()
 		}
 		findClassB = temp.find(startClass, findClassE);
 		findClassE = temp.find(endClass, findClassB);
-	}
-
-	
-}
-
-bool cinString(std::string &str, bool errorChecking = true)
-{
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	std::getline(std::cin, str);
-	if (errorChecking == true)
-	{
-		if (str == "c")
-		{
-			return false;
-		}
-	}
-	return true;
+	}	
 }
 
 void updateTextFile()
@@ -125,34 +91,6 @@ void displayHomework()
 	system("pause");
 	system("CLS");
 }
-
-int showData(displayOption option)
-{
-	int number = 1;
-	for (auto i = 0; i < data.size(); i++)
-	{
-		if (option == NUMBEREDCLASSES)
-		{
-			std::cout << i + 1 << ".";
-		}
-		std::cout << data[i].name << "\n";
-		if (option != NUMBEREDCLASSES)
-		{
-			for (auto j = 0; j < data[i].homework.size(); j++)
-			{
-				std::cout << "   ";
-				if (option == NUMBEREDHOMEWORK)
-				{
-					std::cout << number << ".";
-				}
-				std::cout << data[i].homework[j] << "\n";
-				number++;
-			}
-		}
-	}
-	return number;
-}
-
 
 void addHomework()
 {
@@ -240,32 +178,6 @@ void removeClass()
 	data.erase(data.begin() + classNumber);
 }
 
-bool cinNumber(int &var, int numberCheck)
-{
-	std::cin >> var;
-	if (!cinInputValidation())
-	{
-		system("CLS");
-		std::cout << "Please Enter a Valid Input\n";
-		system("pause");
-		return false;
-	}
-	if (numberCheck < -9)
-	{
-		return true;
-	}
-	else
-	{
-		if (var > numberCheck)
-		{
-			system("CLS");
-			std::cout << "Please Enter a Valid Selection\n";
-			system("pause");
-			return false;
-		}
-	}
-	return true;
-}
 
 void renameClass()
 {
@@ -316,40 +228,29 @@ void switchClass()
 	std::swap(data[pickedClass - 1], data[pickedClass2 - 1]);
 }
 
-bool cinInputValidation()
+void resetAll()
 {
-	if (std::cin.fail())
+	std::cout << "Are You Sure You Want to Clear All Data? [y,n]:";
+	std::string removeOrNot;
+	if (!cinString(removeOrNot))
 	{
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		return false;
+		return;
 	}
-	return true;
+	if (removeOrNot == "y" || removeOrNot == "y")
+	{
+		data.clear();
+	}
+	return;
 }
 
-void removeScrollbars()
+void resetHomework()
 {
-	try {
-		HANDLE console2 = GetStdHandle(STD_OUTPUT_HANDLE);
-		CONSOLE_SCREEN_BUFFER_INFO csbi;
-
-		GetConsoleScreenBufferInfo(console2, &csbi);
-		COORD scrollbar = {
-			csbi.srWindow.Right - csbi.srWindow.Left + 1,
-			csbi.srWindow.Bottom - csbi.srWindow.Top + 1
-		};
-
-		if (console2 == 0) {
-			throw 0;
-		}
-		else {
-			SetConsoleScreenBufferSize(console2, scrollbar);
-		}
-	}
-	catch (...) {
-		std::cout << "Error removing scrollbar";
+	for (auto i = 0; i < data.size(); i++)
+	{
+		data[i].homework.clear();
 	}
 }
+
 int main()
 {
 	storeToVector();
@@ -404,9 +305,11 @@ int main()
 			std::cout << "Select Operation to Preform:\n";
 			std::cout <<
 				"[1] = Rename Class\n"
-				"[2] = Switch Class Order\n\n"
+				"[2] = Switch Class Order\n"
+				"[3] = Reset Homeowrk\n"
+				"[4] = Reset All Data\n\n"
 				"Selection:";
-			if (!cinNumber(settingsOption, 2))
+			if (!cinNumber(settingsOption, 4))
 			{
 				settingsOption = -1;
 			}
@@ -419,6 +322,11 @@ int main()
 			case 2:
 				switchClass();
 				break;
+			case 3:
+				resetHomework();
+				break;
+			case 4:
+				resetAll();
 			default:
 				break;
 			}
