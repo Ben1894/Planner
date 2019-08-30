@@ -72,24 +72,41 @@ bool cinInputValidation()
 int showData(displayOption option)
 {
 	int number = 1;
-	for (auto i = 0; i < data.size(); i++)
+	for(auto i = 0; i < data.size(); i++)
 	{
-		if (option == NUMBEREDCLASSES)
+		if(option == NUMBEREDCLASSESWITHHOMEWORK)
 		{
-			std::cout << i + 1 << ".";
-		}
-		std::cout << data[i].name << "\n";
-		if (option != NUMBEREDCLASSES)
-		{
-			for (auto j = 0; j < data[i].homework.size(); j++)
+			if(data[i].homework.size() != 0)
 			{
-				std::cout << "   ";
-				if (option == NUMBEREDHOMEWORK)
-				{
-					std::cout << number << ".";
-				}
-				std::cout << data[i].homework[j] << "\n";
+				std::cout << number << ".";
+				std::cout << data[i].name << "\n";
 				number++;
+				for (auto j = 0; j < data[i].homework.size(); j++)
+				{
+					std::cout << "   ";
+					std::cout << data[i].homework[j] << "\n";
+				}
+			}
+		}
+		else
+		{
+			if (option == NUMBEREDCLASSES)
+			{
+				std::cout << i + 1 << ".";
+			}
+			std::cout << data[i].name << "\n";
+			if (option != NUMBEREDCLASSES)
+			{
+				for (auto j = 0; j < data[i].homework.size(); j++)
+				{
+					std::cout << "   ";
+					if (option == NUMBEREDHOMEWORK)
+					{
+						std::cout << number << ".";
+					}
+					std::cout << data[i].homework[j] << "\n";
+					number++;
+				}
 			}
 		}
 	}

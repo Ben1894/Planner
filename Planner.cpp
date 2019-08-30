@@ -86,11 +86,13 @@ void displayHomework()
 		system("pause");
 		return;
 	}
-	showData(ENERYTHING);
+	showData(EVERYTHING);
 	std::cout << "\n\n";
 	system("pause");
 	system("CLS");
 }
+
+
 
 void addHomework()
 {
@@ -115,6 +117,47 @@ void addHomework()
 		return;
 	}
 	data[(pickedClass - 1)].homework.push_back(homework);
+}
+
+void resetClassHomework()
+{
+	if(!(data.size() > 0))
+	{
+		std::cout << "Please Add a Class First\n";
+		system("pause");
+		return;
+	}
+
+	int number = showData(NUMBEREDCLASSESWITHHOMEWORK); //returns numbers of classes with homework
+	if (number == 1)
+	{
+		std::cout << "Please Add Homework to a Class First\n";
+		system("pause");
+		return;
+	}
+
+	std::cout << "\nEnter Class Number to Clear Homework from:";
+	int pickedClass;
+	if (!cinNumber(pickedClass, number))
+	{
+		return;
+	}
+
+	for(auto i = 0; i < data.size(); i++)
+	{
+		if(data[i].homework.size() != 0)
+		{
+			if ((i + 1) == pickedClass)
+			{
+				data[i].homework.erase(data[i].homework.begin());
+				return;
+			}
+		}
+		else
+		{
+			pickedClass++;
+		}
+	}
 }
 
 void removeHomework()
@@ -306,10 +349,11 @@ int main()
 			std::cout <<
 				"[1] = Rename Class\n"
 				"[2] = Switch Class Order\n"
-				"[3] = Reset Homeowrk\n"
-				"[4] = Reset All Data\n\n"
+				"[3] = Reset Class Homework\n"
+				"[4] = Reset All Homework\n"
+				"[5] = Reset All Data\n\n"
 				"Selection:";
-			if (!cinNumber(settingsOption, 4))
+			if (!cinNumber(settingsOption, 5))
 			{
 				settingsOption = -1;
 			}
@@ -323,10 +367,14 @@ int main()
 				switchClass();
 				break;
 			case 3:
-				resetHomework();
+				resetClassHomework();
 				break;
 			case 4:
+				resetHomework();
+				break;
+			case 5:
 				resetAll();
+				break;
 			default:
 				break;
 			}
