@@ -308,12 +308,12 @@ int main()
 		removeScrollbars();
 		std::cout << "Select Operation to Preform:\n";
 		std::cout <<
-			"[1] = Display Homework\n"
+			"[1] = Display Classes\n"
 			"[2] = Add Homework\n"
 			"[3] = Remove Homework\n"
 			"[4] = Add Class\n"
 			"[5] = Remove Class\n"
-			"[6] = Settings\n\n"
+			"[6] = More Options\n\n"
 			"Selection:";
 		int option = 0;
 		int settingsOption = 0;
